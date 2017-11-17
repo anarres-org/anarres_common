@@ -1,0 +1,78 @@
+---
+
+# Avoid systemd bug https://github.com/systemd/systemd/issues/3374
+
+- name: copy systemd link
+  copy:
+    src: 99-default.link
+    dest: /etc/systemd/network/99-default.link
+    owner: root
+    group: root
+    mode: 0600
+
+- name: install Docker's dependencies
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg2
+    - software-properties-common
+    - python-docker
+  tags:
+    - dependencies
+
+- name: add Docker's official GPG key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: add Docker's stable repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable
+    state: present
+
+- name: install docker-ce
+  apt:
+    pkg: docker-ce
+    state: installed
+
+- name: create docker directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "u=rwx,g=x,o=x"
+  with_items:
+    - "{{ docker_graph_path }}"
+    - "{{ dockerfile_path }}"
+
+- name: change docker graph path
+  lineinfile:
+    path: '/lib/systemd/system/docker.service'
+    regexp: '^ExecStart=/usr/bin/dockerd '
+    line: "ExecStart=/usr/bin/dockerd -g {{ docker_graph_path }} -H fd://"
+    state: present
+  when:
+    - docker_registry_mirror is not defined
+  notify:
+    restart docker
+
+- name: set docker registry mirror
+  lineinfile:
+    path: '/lib/systemd/system/docker.service'
+    regexp: '^ExecStart=/usr/bin/dockerd '
+    line: "ExecStart=/usr/bin/dockerd -g {{ docker_graph_path }} --registry-mirror {{ docker_registry_mirror }} -H fd://"
+    state: present
+  when:
+    - docker_registry_mirror is defined
+  notify:
+    restart docker
+
+- name: restart docker in order to use the new graph path
+  meta: flush_handlers
+
+- name: pull mariadb docker image (dependency for some services)
+  docker_image:
+    name: "{{ db_docker_image }}"
