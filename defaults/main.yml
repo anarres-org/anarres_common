@@ -1,8 +1,8 @@
 ---
 
-## Common
+# Common
 
-### docker
+## docker
 
 docker_graph_path: "/data/docker"
 dockerfile_path: "/root/dockerfiles"
@@ -11,13 +11,13 @@ dockerfile_path: "/root/dockerfiles"
 
 db_docker_image: "mariadb:10.3"  # official
 
-### sendxmpp
+## sendxmpp
 
 sendxmpp_jid: "server@domain.com"  # Will be used by fail2ban
 sendxmpp_pass: "pass"  # Will be used by fail2ban  # CHANGEME!
 sendxmpp_config: "/root/.sendxmpprc"
 
-### NTP
+## NTP
 
 ntp_servers:
   - 0.europe.pool.ntp.org
