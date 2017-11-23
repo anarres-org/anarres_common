@@ -2,6 +2,10 @@
 
 Role to install and configure some basic utilities for a server.
 
+It is part of [anarres](https://git.hdg.sh/anarres/anarres), a playbook that
+uses a collection of roles to deploy a full-featured server. But it can be used
+and tested independently.
+
 ## Requirements
 
 `sudo` and `python`.
@@ -45,6 +49,10 @@ To test the role you need [molecule](http://molecule.readthedocs.io/en/latest/)
 ```bash
 molecule test
 ```
+
+There is more documentation about the installation and configuration of the
+required tools at
+[wiki-testing](https://git.hdg.sh/anarres/anarres/wiki/testing).
 
 ## License
 
