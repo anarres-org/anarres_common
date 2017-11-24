@@ -1,10 +1,19 @@
 # Common
 
-Role to install and configure some basic utilities for a server.
+Ansible role to install and configure some basic utilities for a GNU/Linux
+server.
 
 It is part of [anarres](https://git.hdg.sh/anarres/anarres), a playbook that
 uses a collection of roles to deploy a full-featured server. But it can be used
 and tested independently.
+
+## Compatibility
+
+These are the tested GNU/Linux distributions. Maybe it works on some other
+distributions too or just requieres a few changes.
+
+* [debian](https://www.debian.org/)
+	* stretch
 
 ## Requirements
 
