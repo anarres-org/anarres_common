@@ -1,7 +1,8 @@
 ---
 galaxy_info:
   author: m0wer
-  description: role to install and configure some basic utilities for a server.
+  description: role to install and configure some basic utilities for a
+  GNU/Linux server.
 
   license: GPLv3
 
