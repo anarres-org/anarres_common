@@ -1,15 +1,22 @@
 ---
 # Defines tasks applicable for NTP (Network Time Protocol)
 
-- name: install ntp
-  apt: pkg=ntp state=installed
+- name: Install ntp
+  package:
+    name: ntp
+    state: present
   tags:
     - dependencies
 
-- name: configure ntp
-  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+- name: Configure ntp
+  template:
+    src: ntp.conf.j2
+    dest: /etc/ntp.conf
   notify:
-    - restart ntp
+    - Restart ntp
 
-- name: ensure ntpd is running
-  service: name=ntp state=started enabled=yes
+- name: Ensure ntpd is running
+  service:
+    name: ntp
+    state: started
+    enabled: yes

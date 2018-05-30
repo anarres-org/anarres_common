@@ -1,11 +1,11 @@
 ---
 
-- name: restart ntp
+- name: Restart ntp
   service:
     name: ntp
     state: restarted
 
-- name: restart docker
+- name: Restart docker
   systemd:
     state: restarted
     daemon_reload: yes

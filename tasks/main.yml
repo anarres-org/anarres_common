@@ -1,8 +1,8 @@
 ---
 
-- name: install base packages
-  apt:
-    pkg: "{{ item }}"
+- name: Install base packages
+  package:
+    name: "{{ item }}"
     state: present
   with_items:
     - curl
@@ -22,20 +22,21 @@
     - python-pexpect
     - net-tools
 
-- name: create sendxmpp config file
+- name: Create sendxmpp config file
   template:
     src: sendxmpp.j2
     dest: "{{ sendxmpp_config }}"
 
-- name: create data directory if it doesn't exists
+- name: Create data directory if it doesn't exists
   file:
     path: /data
     state: directory
     mode: 0700
 
-- name: import ntp tasks
+- name: Import ntp tasks
   import_tasks: ntp.yml
   tags: ntp
-- name: import docker tasks
+
+- name: Import docker tasks
   import_tasks: docker.yml
   tags: docker

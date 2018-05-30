@@ -2,7 +2,7 @@
 
 # Avoid systemd bug https://github.com/systemd/systemd/issues/3374
 
-- name: copy systemd link
+- name: Copy systemd link
   copy:
     src: 99-default.link
     dest: /etc/systemd/network/99-default.link
@@ -10,8 +10,10 @@
     group: root
     mode: 0600
 
-- name: install Docker's dependencies
-  apt: pkg={{ item }} state=installed
+- name: Install Docker's dependencies
+  package:
+    name: "{{ item }}"
+    state: present
   with_items:
     - apt-transport-https
     - ca-certificates
@@ -22,22 +24,22 @@
   tags:
     - dependencies
 
-- name: add Docker's official GPG key
+- name: Add Docker's official GPG key
   apt_key:
     url: https://download.docker.com/linux/debian/gpg
     state: present
 
-- name: add Docker's stable repository
+- name: Add Docker's stable repository
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable
     state: present
 
-- name: install docker-ce
-  apt:
-    pkg: docker-ce
-    state: installed
+- name: Install docker-ce
+  package:
+    name: docker-ce
+    state: present
 
-- name: create docker directories
+- name: Create docker directories
   file:
     path: "{{ item }}"
     state: directory
@@ -48,7 +50,7 @@
     - "{{ docker_graph_path }}"
     - "{{ dockerfile_path }}"
 
-- name: change docker graph path
+- name: Change docker graph path
   lineinfile:
     path: '/lib/systemd/system/docker.service'
     regexp: '^ExecStart=/usr/bin/dockerd '
@@ -57,9 +59,9 @@
   when:
     - docker_registry_mirror is not defined
   notify:
-    restart docker
+    - Restart docker
 
-- name: set docker registry mirror
+- name: Set docker registry mirror
   lineinfile:
     path: '/lib/systemd/system/docker.service'
     regexp: '^ExecStart=/usr/bin/dockerd '
@@ -68,11 +70,11 @@
   when:
     - docker_registry_mirror is defined
   notify:
-    restart docker
+    - Restart docker
 
-- name: restart docker in order to use the new graph path
+- name: Restart docker in order to use the new graph path
   meta: flush_handlers
 
-- name: pull mariadb docker image (dependency for some services)
+- name: Pull mariadb docker image (dependency for some services)
   docker_image:
     name: "{{ db_docker_image }}"
