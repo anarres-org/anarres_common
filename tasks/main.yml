@@ -22,6 +22,8 @@
     - python-mysqldb
     - python-pexpect
     - net-tools
+    - dnsutils
+    - pv
 
 - name: Create sendxmpp config file
   template:
