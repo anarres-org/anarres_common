@@ -25,6 +25,7 @@
     - dnsutils
     - pv
     - ca-certificates
+    - man
 
 - name: Create sendxmpp config file
   template:
