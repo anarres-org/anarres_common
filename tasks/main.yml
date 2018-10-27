@@ -24,6 +24,7 @@
     - net-tools
     - dnsutils
     - pv
+    - ca-certificates
 
 - name: Create sendxmpp config file
   template:
