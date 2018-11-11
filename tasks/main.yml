@@ -9,6 +9,7 @@
     - curl
     - tree
     - htop
+    - iotop
     - less
     - speedtest-cli
     - nload
@@ -22,6 +23,7 @@
     - python-mysqldb
     - python-pexpect
     - net-tools
+    - traceroute
     - dnsutils
     - pv
     - ca-certificates
