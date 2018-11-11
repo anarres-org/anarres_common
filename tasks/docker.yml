@@ -54,7 +54,7 @@
   lineinfile:
     path: '/lib/systemd/system/docker.service'
     regexp: '^ExecStart=/usr/bin/dockerd '
-    line: "ExecStart=/usr/bin/dockerd -g {{ docker_graph_path }} -H fd://"
+    line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_graph_path }}"
     state: present
   when:
     - docker_registry_mirror is not defined
@@ -65,7 +65,7 @@
   lineinfile:
     path: '/lib/systemd/system/docker.service'
     regexp: '^ExecStart=/usr/bin/dockerd '
-    line: "ExecStart=/usr/bin/dockerd -g {{ docker_graph_path }} --registry-mirror {{ docker_registry_mirror }} -H fd://"
+    line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_graph_path }} --registry-mirror {{ docker_registry_mirror }}"
     state: present
   when:
     - docker_registry_mirror is defined
