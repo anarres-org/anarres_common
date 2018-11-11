@@ -28,6 +28,7 @@
     - pv
     - ca-certificates
     - man
+    - bash-completion
 
 - name: Create sendxmpp config file
   template:
