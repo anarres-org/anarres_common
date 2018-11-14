@@ -47,25 +47,25 @@
     group: root
     mode: "u=rwx,g=x,o=x"
   with_items:
-    - "{{ docker_graph_path }}"
+    - "{{ docker_data_root }}"
     - "{{ dockerfile_path }}"
 
-- name: Change docker graph path
+- name: Change docker root path
   lineinfile:
     path: '/lib/systemd/system/docker.service'
     regexp: '^ExecStart=/usr/bin/dockerd '
-    line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_graph_path }}"
+    line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }}"
     state: present
   when:
     - docker_registry_mirror is not defined
   notify:
     - Restart docker
 
-- name: Set docker registry mirror
+- name: Set docker registry mirror and root path
   lineinfile:
     path: '/lib/systemd/system/docker.service'
     regexp: '^ExecStart=/usr/bin/dockerd '
-    line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_graph_path }} --registry-mirror {{ docker_registry_mirror }}"
+    line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }} --registry-mirror {{ docker_registry_mirror }}"
     state: present
   when:
     - docker_registry_mirror is defined

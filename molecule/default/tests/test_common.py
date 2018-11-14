@@ -72,7 +72,7 @@ def test_docker_dependencies(host, name):
     assert docker_package.is_installed
 
 
-@pytest.mark.parametrize("path", ['/data/docker', '/root/dockerfiles'])
+@pytest.mark.parametrize("path", ['/var/lib/docker', '/root/dockerfiles'])
 def test_docker_directories(host, path):
     docker_directory = host.file(path)
     assert docker_directory.exists
@@ -84,4 +84,4 @@ def test_docker_directories(host, path):
 def test_sytemd_docker_conf(host):
     systemd_docker_conf = host.file("/lib/systemd/system/docker.service")
     assert systemd_docker_conf.contains(
-                                "ExecStart=/usr/bin/dockerd -g /data/docker")
+                    "ExecStart=/usr/bin/dockerd --data-root /var/lib/docker")

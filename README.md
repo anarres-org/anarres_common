@@ -23,7 +23,7 @@ distributions too or just requieres a few changes.
 
 ### Docker
 
-* `docker_graph_path`: Base directory for **docker**.
+* `docker_data_root`: Base directory for **docker**.
 * `dockerfile_path`: Directory that stores the dockerfiles.
 * `docker_registry_mirror`: URL to a **docker** registry mirror.
 * `db_docker_image`: Database docker image name and tag.

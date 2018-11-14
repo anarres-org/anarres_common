@@ -4,7 +4,7 @@
 
 ## docker
 
-docker_graph_path: "/data/docker"
+docker_data_root: "/var/lib/docker"
 dockerfile_path: "/root/dockerfiles"
 
 # docker_registry_mirror: "http://172.16.100.1:5000"
