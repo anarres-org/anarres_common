@@ -20,7 +20,15 @@
     - curl
     - gnupg2
     - software-properties-common
-    - python-docker
+  tags:
+    - dependencies
+
+- name: Install Docker's pip dependencies
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - docker
   tags:
     - dependencies
 
