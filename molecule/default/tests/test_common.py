@@ -65,8 +65,7 @@ def test_sytemd_conf(host):
 
 @pytest.mark.parametrize("name", ['apt-transport-https', 'ca-certificates',
                                   'curl', 'gnupg2',
-                                  'software-properties-common',
-                                  'python-docker'])
+                                  'software-properties-common'])
 def test_docker_dependencies(host, name):
     docker_package = host.package(name)
     assert docker_package.is_installed
