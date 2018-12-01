@@ -29,6 +29,7 @@
     - ca-certificates
     - man
     - bash-completion
+    - aptitude
 
 - name: Create sendxmpp config file
   template:
