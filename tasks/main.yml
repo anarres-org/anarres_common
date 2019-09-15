@@ -30,17 +30,20 @@
     - man
     - bash-completion
     - aptitude
+  tags: base_packages
 
 - name: Create sendxmpp config file
   template:
     src: sendxmpp.j2
     dest: "{{ sendxmpp_config }}"
+  tags: sendxmpp_config
 
 - name: Create data directory if it doesn't exists
   file:
     path: /data
     state: directory
     mode: 0700
+  tags: create_data_path
 
 - name: Import ntp tasks
   import_tasks: ntp.yml
