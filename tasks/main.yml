@@ -21,6 +21,7 @@
     - python-pip
     - lsof
     - python-mysqldb
+    - python-pymongo
     - python-pexpect
     - net-tools
     - traceroute
