@@ -37,7 +37,7 @@
 
 - name: Add Docker's stable repository
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
     state: present
 
 - name: Install docker-ce
