@@ -62,6 +62,7 @@
     regexp: '^ExecStart=/usr/bin/dockerd '
     line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }}"
     state: present
+    mode: preserve
   when:
     - docker_registry_mirror is not defined
   notify:
@@ -73,6 +74,7 @@
     regexp: '^ExecStart=/usr/bin/dockerd '
     line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }} --registry-mirror {{ docker_registry_mirror }}"
     state: present
+    mode: preserve
   when:
     - docker_registry_mirror is defined
   notify:
