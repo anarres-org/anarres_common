@@ -1,5 +1,10 @@
 ---
 - name: Converge
   hosts: all
+  gather_facts: false
+  pre_tasks:
+    - name: Gather facts
+      setup:
+        filter: ansible_*
   roles:
-    - role: anarres-common
+    - role: anarres_common

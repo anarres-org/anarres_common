@@ -1,4 +1,4 @@
-# Common
+# Anarres common
 
 Ansible role to install and configure some basic utilities for a GNU/Linux
 server.
@@ -46,8 +46,13 @@ None.
 
 ```yaml
 - hosts: all
+  gather_facts: false
+  pre_tasks:
+    - name: Gather facts
+      setup:
+        filter: ansible_*
   roles:
-    - anarres-common
+    - anarres_common
 ```
 
 ## Testing
