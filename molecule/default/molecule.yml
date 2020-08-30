@@ -11,8 +11,8 @@ lint:
   options:
     config-file: molecule/default/.yamllint
 platforms:
-  - name: stretch
-    box: debian/stretch64
+  - name: buster
+    box: debian/buster64
     interfaces:
       - network_name: private_network
         auto_config: true
