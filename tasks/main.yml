@@ -37,7 +37,7 @@
   template:
     src: sendxmpp.j2
     dest: "{{ sendxmpp_config }}"
-    mode: 0700
+    mode: 0640
   tags: sendxmpp_config
 
 - name: Create data directory if it doesn't exists

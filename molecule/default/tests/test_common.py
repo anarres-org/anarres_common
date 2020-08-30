@@ -22,7 +22,7 @@ def test_sendxmpp_conf(host):
     assert sendxmpp_conf.contains("server@domain.com")
     assert sendxmpp_conf.user == "root"
     assert sendxmpp_conf.group == "root"
-    assert sendxmpp_conf.mode == 0o644
+    assert sendxmpp_conf.mode == 0o640
 
 
 def test_data_dir(host):
@@ -45,7 +45,7 @@ def test_ntp_conf(host):
     assert ntp_conf.contains("server pool.ntp.org")
     assert ntp_conf.user == "root"
     assert ntp_conf.group == "root"
-    assert ntp_conf.mode == 0o644
+    assert ntp_conf.mode == 0o640
 
 
 def test_ntp_service(host):
