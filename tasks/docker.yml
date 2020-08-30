@@ -39,6 +39,7 @@
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
     state: present
+    mode: 0600
 
 - name: Install docker-ce
   package:
@@ -51,7 +52,7 @@
     state: directory
     owner: root
     group: root
-    mode: "u=rwx,g=x,o=x"
+    mode: 0711
   with_items:
     - "{{ docker_data_root }}"
     - "{{ dockerfile_path }}"
@@ -62,7 +63,7 @@
     regexp: '^ExecStart=/usr/bin/dockerd '
     line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }}"
     state: present
-    mode: preserve
+    mode: 0644
   when:
     - docker_registry_mirror is not defined
   notify:
@@ -74,7 +75,7 @@
     regexp: '^ExecStart=/usr/bin/dockerd '
     line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }} --registry-mirror {{ docker_registry_mirror }}"
     state: present
-    mode: preserve
+    mode: 0644
   when:
     - docker_registry_mirror is defined
   notify:
