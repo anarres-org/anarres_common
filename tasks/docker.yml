@@ -45,6 +45,8 @@
   package:
     name: docker-ce
     state: present
+  notify:
+    - Restart docker
 
 - name: Create docker directories
   file:
