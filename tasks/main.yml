@@ -17,12 +17,12 @@
     - vim
     - tmux
     - sendxmpp
+    - lsof
     - mlocate
     - python3-pip
-    - lsof
-    - python-mysqldb
-    - python-pymongo
-    - python-pexpect
+    - python3-mysqldb
+    - python3-pymongo
+    - python3-pexpect
     - net-tools
     - traceroute
     - dnsutils
