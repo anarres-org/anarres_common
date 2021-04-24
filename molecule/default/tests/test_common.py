@@ -3,14 +3,31 @@ import pytest
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+    os.environ["MOLECULE_INVENTORY_FILE"]
+).get_hosts("all")
 
 
-@pytest.mark.parametrize("name", ['curl', 'tree', 'htop', 'less',
-                                  'speedtest-cli', 'nload', 'git',
-                                  'vim', 'tmux', 'sendxmpp', 'mlocate',
-                                  'python-pip', 'lsof', 'python-mysqldb',
-                                  'python-pexpect', 'net-tools'])
+@pytest.mark.parametrize(
+    "name",
+    [
+        "curl",
+        "tree",
+        "htop",
+        "less",
+        "speedtest-cli",
+        "nload",
+        "git",
+        "vim",
+        "tmux",
+        "sendxmpp",
+        "mlocate",
+        "python3-pip",
+        "lsof",
+        "python3-mysqldb",
+        "python3-pexpect",
+        "net-tools",
+    ],
+)
 def test_install_dependencies(host, name):
     package = host.package(name)
     assert package.is_installed
@@ -63,15 +80,22 @@ def test_sytemd_conf(host):
     assert ntp_conf.mode == 0o600
 
 
-@pytest.mark.parametrize("name", ['apt-transport-https', 'ca-certificates',
-                                  'curl', 'gnupg2',
-                                  'software-properties-common'])
+@pytest.mark.parametrize(
+    "name",
+    [
+        "apt-transport-https",
+        "ca-certificates",
+        "curl",
+        "gnupg2",
+        "software-properties-common",
+    ],
+)
 def test_docker_dependencies(host, name):
     docker_package = host.package(name)
     assert docker_package.is_installed
 
 
-@pytest.mark.parametrize("path", ['/var/lib/docker', '/root/dockerfiles'])
+@pytest.mark.parametrize("path", ["/var/lib/docker", "/root/dockerfiles"])
 def test_docker_directories(host, path):
     docker_directory = host.file(path)
     assert docker_directory.exists
@@ -83,4 +107,5 @@ def test_docker_directories(host, path):
 def test_sytemd_docker_conf(host):
     systemd_docker_conf = host.file("/lib/systemd/system/docker.service")
     assert systemd_docker_conf.contains(
-                    "ExecStart=/usr/bin/dockerd --data-root /var/lib/docker")
+        "ExecStart=/usr/bin/dockerd --data-root /var/lib/docker"
+    )
