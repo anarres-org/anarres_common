@@ -87,3 +87,4 @@
 - name: Pull mariadb docker image (dependency for some services)
   docker_image:
     name: "{{ db_docker_image }}"
+    source: pull
