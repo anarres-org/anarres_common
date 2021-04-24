@@ -12,8 +12,10 @@ and tested independently.
 These are the tested GNU/Linux distributions. Maybe it works on some other
 distributions too or just requieres a few changes.
 
-* [debian](https://www.debian.org/)
-	* buster
+* [Debian](https://www.debian.org/)
+  * buster
+* [Ubuntu](https://ubuntu.com/)
+  * latest
 
 ## Requirements
 
