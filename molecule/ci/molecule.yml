@@ -7,6 +7,8 @@ driver:
     managed: false
     ansible_connection_options:
       ansible_connection: local
+platforms:
+  - name: ubuntu-latest
 lint: |
   set -e
   yamllint -c .yamllint .
@@ -17,8 +19,6 @@ provisioner:
   options:
     become: true
     extra-vars: "{'testing': true, domain: 'anarres.local'}"
-scenario:
-  name: default
 verifier:
   name: testinfra
   options:
