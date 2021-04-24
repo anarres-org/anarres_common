@@ -42,7 +42,7 @@ distributions too or just requieres a few changes.
 
 ## Dependencies
 
-None.
+`sudo` and `python` in the target host(s).
 
 ## Example playbook
 
@@ -59,16 +59,23 @@ None.
 
 ## Testing
 
-To test the role you need [molecule](http://molecule.readthedocs.io/en/latest/)
-.
+To test the role you need [molecule](http://molecule.readthedocs.io/en/latest/),
+**vagrant**, **virtualbox** and some python requirements that can be installed wwith
+`pip install -r requirements-dev.txt`.
 
 ```bash
 molecule test
 ```
 
+or
+
+```bash
+make test
+```
+
 There is more documentation about the installation and configuration of the
 required tools at
-[wiki-testing](https://git.hdg.sh/anarres/anarres/wiki/testing).
+[Testing - Anarres documentation](https://anarres-org.github.io/anarres/testing/).
 
 ## License
 
@@ -76,4 +83,4 @@ GPLv3
 
 ## Author Information
 
-m0wer: m0wer (at) autistici.org
+* m0wer (at) autistici (dot) org
