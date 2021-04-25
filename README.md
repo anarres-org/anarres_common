@@ -19,7 +19,11 @@ distributions too or just requieres a few changes.
 
 ## Requirements
 
-`sudo` and `python`.
+In your local machine:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Role Variables
 

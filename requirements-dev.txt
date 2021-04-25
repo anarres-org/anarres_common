@@ -11,7 +11,7 @@ ansible-lint==5.0.7
     #   -r requirements-dev.in
     #   molecule
 ansible==3.3.0
-    # via -r requirements-dev.in
+    # via -r requirements.in
 appdirs==1.4.4
     # via virtualenv
 argcomplete==1.12.3
@@ -73,7 +73,7 @@ distro==1.5.0
     # via selinux
 docker==5.0.0
     # via
-    #   -r requirements-dev.in
+    #   -r requirements.in
     #   molecule-docker
 enrich==1.2.6
     # via
