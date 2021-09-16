@@ -1,4 +1,5 @@
 import os
+
 import pytest
 import testinfra.utils.ansible_runner
 
@@ -11,21 +12,22 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     "name",
     [
         "curl",
-        "tree",
+        "git",
         "htop",
         "less",
-        "speedtest-cli",
-        "nload",
-        "git",
-        "vim",
-        "tmux",
-        "sendxmpp",
-        "mlocate",
-        "python3-pip",
         "lsof",
+        "mlocate",
+        "neovim",
+        "net-tools",
+        "nload",
         "python3-mysqldb",
         "python3-pexpect",
-        "net-tools",
+        "python3-pip",
+        "sendxmpp",
+        "speedtest-cli",
+        "tmux",
+        "tree",
+        "uptimed",
     ],
 )
 def test_install_dependencies(host, name):
