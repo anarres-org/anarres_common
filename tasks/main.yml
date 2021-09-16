@@ -2,7 +2,7 @@
 
 - name: Install base packages
   package:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
   with_items:
     - aptitude
@@ -20,6 +20,7 @@
     - mlocate
     - net-tools
     - nload
+    - neovim
     - pv
     - python3-mysqldb
     - python3-pexpect
@@ -31,13 +32,12 @@
     - traceroute
     - tree
     - uptimed
-    - vim
   tags: base_packages
 
 - name: Create sendxmpp config file
   template:
     src: sendxmpp.j2
-    dest: "{{ sendxmpp_config }}"
+    dest: '{{ sendxmpp_config }}'
     mode: 0640
   tags: sendxmpp_config
 
