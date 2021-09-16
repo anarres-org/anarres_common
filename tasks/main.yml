@@ -5,32 +5,33 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - aptitude
+    - bash-completion
+    - ca-certificates
     - coreutils
     - curl
-    - tree
+    - dnsutils
+    - git
     - htop
     - iotop
     - less
-    - speedtest-cli
-    - nload
-    - git
-    - vim
-    - tmux
-    - sendxmpp
     - lsof
-    - mlocate
-    - python3-pip
-    - python3-mysqldb
-    - python3-pymongo
-    - python3-pexpect
-    - net-tools
-    - traceroute
-    - dnsutils
-    - pv
-    - ca-certificates
     - man
-    - bash-completion
-    - aptitude
+    - mlocate
+    - net-tools
+    - nload
+    - pv
+    - python3-mysqldb
+    - python3-pexpect
+    - python3-pip
+    - python3-pymongo
+    - sendxmpp
+    - speedtest-cli
+    - tmux
+    - traceroute
+    - tree
+    - uptimed
+    - vim
   tags: base_packages
 
 - name: Create sendxmpp config file
