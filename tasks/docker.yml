@@ -12,7 +12,7 @@
 
 - name: Install Docker's dependencies
   package:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
   with_items:
     - apt-transport-https
@@ -37,7 +37,8 @@
 
 - name: Add Docker's stable repository
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution
+      | lower }} {{ ansible_distribution_release }} stable
     state: present
     mode: 0600
 
@@ -48,20 +49,20 @@
 
 - name: Create docker directories
   file:
-    path: "{{ item }}"
+    path: '{{ item }}'
     state: directory
     owner: root
     group: root
-    mode: 0711
+    mode: 0710
   with_items:
-    - "{{ docker_data_root }}"
-    - "{{ dockerfile_path }}"
+    - '{{ docker_data_root }}'
+    - '{{ dockerfile_path }}'
 
 - name: Change docker root path
   lineinfile:
-    path: '/lib/systemd/system/docker.service'
+    path: /lib/systemd/system/docker.service
     regexp: '^ExecStart=/usr/bin/dockerd '
-    line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }}"
+    line: ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }}
     state: present
     mode: 0644
   when:
@@ -71,9 +72,10 @@
 
 - name: Set docker registry mirror and root path
   lineinfile:
-    path: '/lib/systemd/system/docker.service'
+    path: /lib/systemd/system/docker.service
     regexp: '^ExecStart=/usr/bin/dockerd '
-    line: "ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }} --registry-mirror {{ docker_registry_mirror }}"
+    line: ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }} --registry-mirror
+      {{ docker_registry_mirror }}
     state: present
     mode: 0644
   when:
@@ -86,5 +88,5 @@
 
 - name: Pull mariadb docker image (dependency for some services)
   docker_image:
-    name: "{{ db_docker_image }}"
+    name: '{{ db_docker_image }}'
     source: pull
