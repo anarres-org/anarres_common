@@ -103,7 +103,7 @@ def test_docker_directories(host, path):
     assert docker_directory.exists
     assert docker_directory.user == "root"
     assert docker_directory.group == "root"
-    assert docker_directory.mode == 0o711
+    assert docker_directory.mode == 0o710
 
 
 def test_sytemd_docker_conf(host):
