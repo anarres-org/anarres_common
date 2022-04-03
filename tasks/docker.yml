@@ -3,7 +3,7 @@
 # Avoid systemd bug https://github.com/systemd/systemd/issues/3374
 
 - name: Copy systemd link
-  copy:
+  ansible.builtin.copy:
     src: 99-default.link
     dest: /etc/systemd/network/99-default.link
     owner: root
@@ -11,7 +11,7 @@
     mode: 0600
 
 - name: Install Docker's dependencies
-  package:
+  ansible.builtin.package:
     name: '{{ item }}'
     state: present
   with_items:
@@ -24,31 +24,31 @@
     - dependencies
 
 - name: Install Docker's pip dependencies
-  pip:
+  ansible.builtin.pip:
     name: docker
     state: present
   tags:
     - dependencies
 
 - name: Add Docker's official GPG key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://download.docker.com/linux/debian/gpg
     state: present
 
 - name: Add Docker's stable repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution
       | lower }} {{ ansible_distribution_release }} stable
     state: present
     mode: 0600
 
 - name: Install docker-ce
-  package:
+  ansible.builtin.package:
     name: docker-ce
     state: present
 
 - name: Create docker directories
-  file:
+  ansible.builtin.file:
     path: '{{ item }}'
     state: directory
     owner: root
@@ -59,7 +59,7 @@
     - '{{ dockerfile_path }}'
 
 - name: Change docker root path
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /lib/systemd/system/docker.service
     regexp: '^ExecStart=/usr/bin/dockerd '
     line: ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }}
@@ -71,7 +71,7 @@
     - Restart docker
 
 - name: Set docker registry mirror and root path
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /lib/systemd/system/docker.service
     regexp: '^ExecStart=/usr/bin/dockerd '
     line: ExecStart=/usr/bin/dockerd --data-root {{ docker_data_root }} --registry-mirror
@@ -84,7 +84,7 @@
     - Restart docker
 
 - name: Restart docker in order to use the new graph path
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Pull mariadb docker image (dependency for some services)
   docker_image:

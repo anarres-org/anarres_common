@@ -1,7 +1,7 @@
 ---
 
 - name: Install base packages
-  package:
+  ansible.builtin.package:
     name: '{{ item }}'
     state: present
   with_items:
@@ -35,14 +35,14 @@
   tags: base_packages
 
 - name: Create sendxmpp config file
-  template:
+  ansible.builtin.template:
     src: sendxmpp.j2
     dest: '{{ sendxmpp_config }}'
     mode: 0640
   tags: sendxmpp_config
 
 - name: Create data directory if it doesn't exists
-  file:
+  ansible.builtin.file:
     path: /data
     state: directory
     mode: 0700
